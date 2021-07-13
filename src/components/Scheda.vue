@@ -1,5 +1,6 @@
 <template>
   <section>
+      <h2>Film:</h2>
       <ul>
           <li><strong>{{dettagli.title}}</strong></li>
           <li>{{dettagli.original_title}}</li>
