@@ -1,10 +1,10 @@
 <template>
   <section>
-      <h2>Serie tv:</h2>
+      <h6>Serie tv:</h6>
       <ul>
-          <li><strong>{{dettagliTV.name}}</strong></li>
+          <li><strong>{{dettagliTv.name}}</strong></li>
           <li>{{dettagliTv.original_name}}</li>
-          <li>{{dettagliTv.original_language}}</li>
+          <li><img :src="lingua(dettagliTv.original_language)" :alt="dettagliTv.original_language"></li>
           <li>{{dettagliTv.vote_average}}</li>
       </ul>
   </section>
@@ -13,7 +13,17 @@
 <script>
 export default {
     name: 'SchedaTv',
-    props:['dettagliTv']
+    props:['dettagliTv'],
+    methods:{
+        lingua(img) {
+      try {
+        let nomeimg = require('../assets/' + img + '.png');
+        return nomeimg
+      } 
+      catch{
+      }
+    }
+    }
 }
 </script>
 
@@ -21,6 +31,10 @@ export default {
 
 ul{
     list-style: none;
+}
+
+img{
+    width: 20px;
 }
 
 </style>

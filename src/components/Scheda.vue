@@ -1,10 +1,10 @@
 <template>
   <section>
-      <h2>Film:</h2>
+      <h6>Film:</h6>
       <ul>
           <li><strong>{{dettagli.title}}</strong></li>
           <li>{{dettagli.original_title}}</li>
-          <li>{{dettagli.original_language}}</li>
+          <li><img :src="lingua(dettagli.original_language)" :alt="dettagli.original_language"></li>
           <li>{{dettagli.vote_average}}</li>
       </ul>
   </section>
@@ -13,7 +13,17 @@
 <script>
 export default {
     name: 'Scheda',
-    props:['dettagli']
+    props:['dettagli'],
+    methods:{
+        lingua(img) {
+      try {
+        let nomeimg = require('../assets/' + img + '.png');
+        return nomeimg
+      } 
+      catch{
+      }
+    }
+    }
 }
 </script>
 
@@ -21,6 +31,10 @@ export default {
 
 ul{
     list-style: none;
+}
+
+img{
+    width: 20px;
 }
 
 </style>
