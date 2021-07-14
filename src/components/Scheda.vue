@@ -1,10 +1,10 @@
 <template>
   <section>
-      <h6>Film:</h6>
       <ul>
-          <li><strong>{{dettagli.title}}</strong></li>
-          <li>{{dettagli.original_title}}</li>
-          <li><img :src="lingua(dettagli.original_language)" :alt="dettagli.original_language"></li>
+          <li><strong>{{dettagli.title || dettagli.name}}</strong></li>
+          <li><img :src="`https://image.tmdb.org/t/p/${grandezza}${dettagli.backdrop_path}`" :alt="dettagli.title || dettagli.name"></li>
+          <li>{{dettagli.original_title || dettagli.original_name}}</li>
+          <li><img class="lingua" :src="lingua(dettagli.original_language)" :alt="dettagli.original_language"></li>
           <li>{{dettagli.vote_average}}</li>
       </ul>
   </section>
@@ -14,6 +14,11 @@
 export default {
     name: 'Scheda',
     props:['dettagli'],
+    data(){
+      return{
+        grandezza:'w342'
+      }
+    },
     methods:{
         lingua(img) {
       try {
@@ -33,7 +38,7 @@ ul{
     list-style: none;
 }
 
-img{
+.lingua{
     width: 20px;
 }
 

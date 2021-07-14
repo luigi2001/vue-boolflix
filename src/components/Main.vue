@@ -1,18 +1,18 @@
 <template>
   <section>
+    <h3>Film:</h3>
     <Scheda  v-for="film in dettagli" :key="film.id" :dettagli="film"/>
-    <SchedaTv v-for="serietv in dettagliTv" :key="serietv.id" :dettagliTv="serietv"/>
+    <h3>Serie tv:</h3>
+    <Scheda v-for="serietv in dettagliTv" :key="serietv.id" :dettagli="serietv"/>
   </section>
 </template>
 
 <script>
-import Scheda from '@/components/Scheda.vue';
-import SchedaTv from '@/components/SchedaTv.vue'
+import Scheda from '@/components/Scheda.vue'
 export default {
     name: 'Main',
     components:{
-        Scheda,
-        SchedaTv
+        Scheda
     },
     props: ['dettagli', 'dettagliTv']
 }
