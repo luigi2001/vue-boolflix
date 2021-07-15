@@ -4,8 +4,8 @@
           <li><strong>{{dettagli.title || dettagli.name}}</strong></li>
           <li><img :src="`https://image.tmdb.org/t/p/${grandezza}${dettagli.backdrop_path}`" :alt="dettagli.title || dettagli.name"></li>
           <li>{{dettagli.original_title || dettagli.original_name}}</li>
-          <li><img class="lingua" :src="lingua(dettagli.original_language)" :alt="dettagli.original_language"></li>
-          <li>{{dettagli.vote_average}}</li>
+          <li><img class="lingua" :src="require(`../assets/${dettagli.original_language}.png`)" :alt="dettagli.original_language"></li>
+          <li><i class="fas fa-star warning giallo" v-for="(stella,index) in stelle(dettagli.vote_average)" :key="index"></i></li>
       </ul>
   </section>
 </template>
@@ -20,15 +20,11 @@ export default {
       }
     },
     methods:{
-        lingua(img) {
-      try {
-        let nomeimg = require('../assets/' + img + '.png');
-        return nomeimg
-      } 
-      catch{
+      stelle(voto){
+        return parseInt(Math.round(voto / 2))
       }
     }
-    }
+    
 }
 </script>
 
@@ -36,10 +32,13 @@ export default {
 
 ul{
     list-style: none;
-}
 
-.lingua{
+  .lingua{
     width: 20px;
-}
+  }
 
+  .giallo{
+    color: yellow;
+  }
+}
 </style>
