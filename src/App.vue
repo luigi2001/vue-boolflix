@@ -27,28 +27,23 @@ export default {
   },
   methods:{
     funzionecerca(testocerca){
+
+    const request = {
+      params:{
+          api_key: this.apikay,
+          query: testocerca,
+          language: this.language
+        }
+    };
       axios
-           .get(this.url, {
-             params:{
-               api_key: this.apikay,
-               query: testocerca,
-               language: this.language
-             }
-           })
-           .then(risposta =>{
-             this.films = risposta.data.results;
-           });
-      axios
-           .get(this.urltv, {
-             params:{
-               api_key: this.apikay,
-               query: testocerca,
-               language: this.language
-             }
-           })
-           .then(risposta=>{
-             this.serietv = risposta.data.results;
-           })     
+           .all([
+             axios.get(this.url, request),
+             axios.get(this.urltv, request)
+           ])
+           .then(axios.spread((rispostaFilm,rispostaTv) =>{
+             this.films = rispostaFilm.data.results;
+             this.serietv = rispostaTv.data.results
+           }))
     }
   }
   

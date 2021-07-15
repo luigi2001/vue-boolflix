@@ -1,12 +1,13 @@
 <template>
-  <section>
-      <ul>
-          <li><strong>{{dettagli.title || dettagli.name}}</strong></li>
-          <li><img :src="`https://image.tmdb.org/t/p/${grandezza}${dettagli.backdrop_path}`" :alt="dettagli.title || dettagli.name"></li>
-          <li>{{dettagli.original_title || dettagli.original_name}}</li>
-          <li><img class="lingua" :src="require(`../assets/${dettagli.original_language}.png`)" :alt="dettagli.original_language"></li>
-          <li><i class="fas fa-star text-warning" v-for="(stella,index) in stelle(dettagli.vote_average)" :key="index"></i></li>
-      </ul>
+  <section @mouseover="hover = true" @mouseleave="hover = false">
+    <img :src="`https://image.tmdb.org/t/p/${grandezza}${dettagli.backdrop_path}`" :alt="dettagli.title || dettagli.name">
+    <div class="box text-light" v-if="hover">
+      <h3><strong>{{dettagli.title || dettagli.name}}</strong></h3>
+      <h4>{{dettagli.original_title || dettagli.original_name}}</h4>
+      <img class="lingua" :src="require(`../assets/${dettagli.original_language}.png`)" :alt="dettagli.original_language">
+      <span class="d-block"><i class="fas fa-star text-warning" v-for="(stella,index) in stelle(dettagli.vote_average)" :key="index"></i></span>
+      <p>{{dettagli.overview}}</p>
+    </div>
   </section>
 </template>
 
@@ -16,7 +17,8 @@ export default {
     props:['dettagli'],
     data(){
       return{
-        grandezza:'w342'
+        grandezza:'w342',
+        hover: false
       }
     },
     methods:{
@@ -29,12 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
-
-ul{
-    list-style: none;
-
-  .lingua{
-    width: 20px;
-  }
+.lingua{
+  width: 20px;
 }
 </style>
