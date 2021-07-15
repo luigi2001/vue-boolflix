@@ -5,7 +5,7 @@
           <li><img :src="`https://image.tmdb.org/t/p/${grandezza}${dettagli.backdrop_path}`" :alt="dettagli.title || dettagli.name"></li>
           <li>{{dettagli.original_title || dettagli.original_name}}</li>
           <li><img class="lingua" :src="require(`../assets/${dettagli.original_language}.png`)" :alt="dettagli.original_language"></li>
-          <li><i class="fas fa-star warning giallo" v-for="(stella,index) in stelle(dettagli.vote_average)" :key="index"></i></li>
+          <li><i class="fas fa-star text-warning" v-for="(stella,index) in stelle(dettagli.vote_average)" :key="index"></i></li>
       </ul>
   </section>
 </template>
@@ -35,10 +35,6 @@ ul{
 
   .lingua{
     width: 20px;
-  }
-
-  .giallo{
-    color: yellow;
   }
 }
 </style>
